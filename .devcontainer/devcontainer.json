@@ -1,0 +1,28 @@
+{
+    "name": "ArUCo Markers Dev Container",
+    "image": "opencv-numpy-image:latest", // Use the pre-built Docker image
+    "runArgs": [
+        "--gpus=all", // Enable all available GPUs
+        "--rm", // Remove container when it exits
+        "--network=host", // Use host network stack
+        "--pid=host", // Use host's PID namespace
+        "--ipc=host", // Use host's IPC namespace
+        "--privileged", // Give extended privileges to container
+        "--runtime=nvidia", // Use NVIDIA runtime
+        "--device=/dev/video0:/dev/video0" // Pass through video device
+    ],
+    "mounts": [
+        "source=${localWorkspaceFolder}/..,target=/repos,type=bind"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python", // Python extension for VS Code
+                "ms-python.vscode-pylance" // Pylance for Python language support
+            ],
+            "settings": {
+                "python.pythonPath": "/usr/local/bin/python3" // Path to Python in the container
+            }
+        }
+    }
+}
